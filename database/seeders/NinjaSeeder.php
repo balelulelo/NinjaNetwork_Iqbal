@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ninja;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,11 @@ class NinjaSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->command->info('Starting NinjaSeeder...');
+
+        Ninja::factory()->count(50)->create();
+
+        $this->command->info('NinjaSeeder Complete...');
         //
     }
 }

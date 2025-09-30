@@ -9,14 +9,14 @@ class NinjaController extends Controller
 {
     public function index() {
         // fetch all records and pass into index view
-        $ninjas = Ninja::orderBy('created_at', 'desc')->paginate(10);
+        $ninjas = Ninja::with('dojo')->orderBy('created_at', 'desc')->paginate(10);
         
         return view('ninjas.index', ["ninjas" => $ninjas]);
     }
 
     public function show($id) {
         // fetch a single record and pass into show view
-        $ninja = Ninja::findorFail($id);
+        $ninja = Ninja::with('dojo')->findorFail($id);
 
         return view('ninjas.show', ["ninja" => $ninja]);
     }
