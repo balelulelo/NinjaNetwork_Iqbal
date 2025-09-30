@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ninja;
+use App\Models\Dojo;
 use Illuminate\Http\Request;
 
 class NinjaController extends Controller
@@ -23,11 +24,23 @@ class NinjaController extends Controller
 
     public function create() {
         // render create view to users
-    
-         return view('ninjas.create');
+        $dojos = Dojo::all();
+
+         return view('ninjas.create', ["dojos" => $dojos]);
     }
 
-    public function store() {
+    public function store(Request $request) {
         // handle POST request to save new ninja record
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'skill' => 'required|integer|min:1|max:100',
+            'bio' => 'required|string|min:20|max:1000',
+            'dojo_id' => 'required|exists:dojos,id',
+        ]);
+
+        Ninja::create($validated);
+
+        return redirect()->route('ninjas.index');
+    
     }
 }

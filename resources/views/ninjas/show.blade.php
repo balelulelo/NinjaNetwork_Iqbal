@@ -7,7 +7,7 @@
         <p>{{ $ninja->bio }}</p>
     </div>
 
-    <div class="border-2 border-dashed bg-white px-5 pb-5 my-5 rounded">
+    <div class="card my-5">
         <h3>Dojo Information</h3>
         <p><strong>Dojo Name:</strong> {{ $ninja->dojo->name }}</p>
         <p><strong>Location:</strong> {{ $ninja->dojo->location }}</p>
