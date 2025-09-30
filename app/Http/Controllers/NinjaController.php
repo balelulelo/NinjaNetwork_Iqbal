@@ -43,4 +43,12 @@ class NinjaController extends Controller
         return redirect()->route('ninjas.index');
     
     }
+
+    public function destroy($id) {
+        // handle DELETE request to remove a ninja record
+        $ninja = Ninja::findOrFail($id);
+        $ninja->delete();
+
+        return redirect()->route('ninjas.index');
+    }
 }

@@ -9,17 +9,18 @@
             @csrf
             <div class="form-group">
                 <label for="name">Ninja Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" value="{{ old('name') }}"required>
+
             </div>
 
             <div class="form-group">
                 <label for="skill">Ninja Skill (0-100):</label>
-                <input type="number" id="skill" name="skill" required>
+                <input type="number" id="skill" name="skill" value="{{ old('skill') }}" required>
             </div>
 
             <div class="form-group">
                 <label for="bio">Biography</label>
-                <textarea rows="5" id="bio" name="bio" required></textarea>
+                <textarea rows="5" id="bio" name="bio"required>{{ old('bio') }}</textarea>
             </div>
 
             <div class="form-group">
@@ -27,7 +28,7 @@
                 <select id="dojo_id" name="dojo_id" required>
                     <option value="" disabled selected>Select a Dojo</option>
                     @foreach($dojos as $dojo)
-                        <option value="{{ $dojo->id }}">{{ $dojo->name }}</option>
+                        <option value="{{ $dojo->id }}" {{ $dojo->id == old('dojo_id') ? 'selected' : '' }}>{{ $dojo->name }}</option>
 
                     @endforeach
                 
@@ -35,6 +36,17 @@
             </div>
 
             <button type="submit" class="btn">Create</button>
-        </form>
     </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="px-4 py-2 bg-red-100">
+                @foreach ($errors->all() as $error)
+                    <li class="my-2 text-red-500">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    </form>
 </x-layout>

@@ -15,4 +15,9 @@
         <p>{{ $ninja->dojo->description }}</p>
     </div>
 
+    <form action="{{ route('ninjas.destroy', $ninja->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this ninja?');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn my-5">Delete Ninja</button>
+
 </x-layout>
